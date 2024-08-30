@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Curso, Avaliacao
+from .models import Curso, Avaliacao, Professor
 
 class AvaliacaoSerializer(serializers.ModelSerializer):
     curso = serializers.CharField(source='curso.titulo', read_only=True)
@@ -30,5 +30,19 @@ class CursoSerializer(serializers.ModelSerializer):
             'url',
             'publicacao',
             'ativo'
-        )    
+        )
+
+
+class ProfessorSerializer(serializers.ModelSerializer):
+    curso = serializers.CharField(source='curso.titulo', read_only=True)
+
+    class Meta:
+        model = Professor
+        fields = (
+            'nome',
+            'registro',
+            'curso',
+            'publicacao',
+            'ativo'
+        )
         

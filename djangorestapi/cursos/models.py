@@ -34,3 +34,17 @@ class Avaliacao(Base):
     
     def __str__(self):
         return f'{self.nome} avaliou o {self.curso} com nota {self.avaliacao}' 
+    
+
+class Professor(Base):
+
+    nome = models.CharField(max_length=255)
+    registro = models.IntegerField(unique=True)
+    curso = models.ForeignKey(Curso, related_name='professores', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'professor'
+        verbose_name_plural = 'professores'
+        
+    def __str__(self):
+        return self.nome
