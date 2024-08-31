@@ -19,20 +19,6 @@ class AvaliacaoSerializer(serializers.ModelSerializer):
             'ativo'
         )
 
-
-class CursoSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Curso
-        fields = (
-            'id',
-            'titulo',
-            'url',
-            'publicacao',
-            'ativo'
-        )
-
-
 class ProfessorSerializer(serializers.ModelSerializer):
     curso = serializers.CharField(source='curso.titulo', read_only=True)
 
@@ -45,4 +31,22 @@ class ProfessorSerializer(serializers.ModelSerializer):
             'publicacao',
             'ativo'
         )
+
+class CursoSerializer(serializers.ModelSerializer):
+    professores = ProfessorSerializer(many=True, read_only=True)
+    
+
+    class Meta:
+        model = Curso
+        fields = (
+            'id',
+            'titulo',
+            'url',
+            'professores',
+            'publicacao',
+            'ativo'
+        )
+
+
+
         

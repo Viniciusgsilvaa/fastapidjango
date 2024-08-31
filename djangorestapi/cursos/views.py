@@ -52,6 +52,11 @@ class CursoViewSet(viewsets.ModelViewSet):
         serializer = AvaliacaoSerializer(curso.avaliacoes.all(), many=True)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['get'])
+    def professor(self, request, pk=None):
+        curso = self.get_object()
+        serializer = ProfessorSerializer(curso.professores.all(), many=True)
+        return Response(serializer.data)
 
 class AvaliacaoViewSet(viewsets.ModelViewSet):
     queryset = Avaliacao.objects.all()
