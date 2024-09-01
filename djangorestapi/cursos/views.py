@@ -5,6 +5,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.views.generic import TemplateView
+from rest_framework import permissions
+from .permissions import IsSuperUser
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -43,6 +45,7 @@ API V2
 """
 
 class CursoViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsSuperUser, permissions.DjangoModelPermissions,)
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
 
